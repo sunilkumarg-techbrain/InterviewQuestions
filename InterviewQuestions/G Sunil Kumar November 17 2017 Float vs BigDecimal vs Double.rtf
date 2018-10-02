@@ -1,0 +1,230 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\f0\fs22 Vignesh Inputs on Project structure and so on -\par
+Three big projects in Java\par
+Handling applets\par
+Oracle Java Certification - Syllabus and notes - \par
+Java and   .Net Development courses   \par
+\b  Double vs Float vs BigDecimal\par
+\b0   \par
+\pard\sa200\sl276\slmult1 Decimal numbers are approximations, not the value you assign. Any intuition gained in math-world no longer applies. Expect a+b = a, a != a/3 + a/3 + a/3 and a - b = a during double and float keywords. \par
+Avoid using the ==, compare against some tolerance or use the >= or <= operators\par
+Java is WYSINWYG! Never believe the value you print/write is approximated value, hence always read/write decimal numbers in the same format.\par
+\pard\sa200\sl276\slmult1\par
+\b Example 1\par
+\b0 double a = 0.02;\par
+  double b = 0.03;\par
+ double c = b - a;\par
+ System.out.println(c);\par
+\par
+BigDecimal _a = new BigDecimal("0.02");\par
+BigDecimal _b = new BigDecimal("0.03");\par
+BigDecimal _c = _b.subtract(_a);\par
+System.out.println(_c);\par
+\par
+Program output:\par
+0.009999999999999998\par
+0.01\par
+\par
+\pard\sa200\sl276\slmult1\par
+\b Example 2\b0\par
+double d1 = 2.2999999999999996d;\par
+double d2 = 2.2999999999999997d;\par
+System.out.println( d1 + " " + (2.3d == d1) );\par
+System.out.println( d2 + " " + (2.3d == d2) );\par
+Program Output\par
+2.2999999999999994 false\par
+2.3 true\par
+\pard\sa200\sl276\slmult1\par
+\b Example 3\b0\par
+\pard\sa200\sl276\slmult1 public class Calc2 \{ \par
+  public static void main(String args[]) \{\par
+    BigDecimal amount = new BigDecimal("100.05"); \par
+    BigDecimal discountPercent = new BigDecimal("0.10"); \par
+    BigDecimal discount = amount.multiply(discountPercent); \par
+    discount = discount.setScale(2, RoundingMode.HALF_UP); \par
+    BigDecimal total = amount.subtract(discount);\par
+    total = total.setScale(2, RoundingMode.HALF_UP); \par
+    BigDecimal taxPercent = new BigDecimal("0.05"); \par
+    BigDecimal tax = total.multiply(taxPercent); \par
+    tax = tax.setScale(2, RoundingMode.HALF_UP); \par
+    BigDecimal taxedTotal = total.add(tax);\par
+    taxedTotal = taxedTotal.setScale(2, RoundingMode.HALF_UP);\par
+    System.out.println("Subtotal : " + amount);\par
+    System.out.println("Discount : " + discount);\par
+    System.out.println("Total : " + total); \par
+    System.out.println("Tax : " + tax); \par
+    System.out.println("Tax+Total: " + taxedTotal); \par
+  \} \par
+\}\par
+\par
+\b Program Output\b0\par
+Subtotal : 100.05 \par
+Discount : 10.01 \par
+Total : 90.04 \par
+Tax : 4.50 \par
+Tax+Total: 94.54\par
+\pard\sa200\sl276\slmult1\par
+\par
+\b byte\par
+\b0 Byte data type is an 8-bit signed two's complement integer\par
+Minimum value is -128 (-2^7)\par
+Maximum value is 127 (inclusive)(2^7 -1)\par
+Default value is 0\par
+Byte data type is used to save space in large arrays, mainly in place of integers, since a byte is four times smaller than an integer.\par
+\b Example 4\b0 : byte a = 100, byte b = -50\par
+\par
+\b short\b0\par
+Short data type is a 16-bit signed two's complement integer\par
+Minimum value is -32,768 (-2^15)\par
+Maximum value is 32,767 (inclusive) (2^15 -1)\par
+Short data type can also be used to save memory as byte data type. A short is 2 times smaller than an integer\par
+Default value is 0.\par
+\b Example 5:\b0  short s = 10000, short r = -20000\par
+\par
+\b int\b0\par
+Int data type is a 32-bit signed two's complement integer.\par
+Minimum value is - 2,147,483,648 (-2^31)\par
+Maximum value is 2,147,483,647(inclusive) (2^31 -1)\par
+Integer is generally used as the default data type for integral values unless there is a concern about memory.\par
+The default value is 0\par
+\b Example 6:\b0  int a = 100000, int b = -200000\par
+\par
+\b long\b0\par
+Long data type is a 64-bit signed two's complement integer\par
+Minimum value is -9,223,372,036,854,775,808(-2^63)\par
+Maximum value is 9,223,372,036,854,775,807 (inclusive)(2^63 -1)\par
+This type is used when a wider range than int is needed\par
+Default value is 0L\par
+\b Example 7:\b0  long a = 100000L, long b = -200000L\par
+\b\par
+float\b0\par
+Float data type is a single-precision 32-bit IEEE 754 floating point\par
+Float is mainly used to save memory in large arrays of floating point numbers\par
+Default value is 0.0f\par
+Float data type is never used for precise values such as currency\par
+\b Example 8:\b0  float f1 = 234.5f\par
+\par
+\b double\b0\par
+double data type is a double-precision 64-bit IEEE 754 floating point\par
+This data type is generally used as the default data type for decimal values, generally the default choice\par
+Double data type should never be used for precise values such as currency\par
+Default value is 0.0d\par
+\b Example 9:\b0  double d1 = 123.4d\par
+\par
+\b boolean\par
+\b0 boolean data type represents one bit of information\par
+There are only two possible values: true and false\par
+This data type is used for simple flags that track true/false conditions\par
+Default value is false\par
+\b Example 10:\b0  boolean one = true\par
+\par
+\b char\b0\par
+char data type is a single 16-bit Unicode character\par
+Minimum value is '\\u0000' (or 0)\par
+Maximum value is '\\uffff' (or 65,535 inclusive)\par
+Char data type is used to store any character\par
+\b Example 11:\b0  char letterA = 'A'\par
+\par
+\b Local Variables\par
+\b0 Local variables are declared in methods, constructors, or blocks.\par
+\par
+\b Example 12:\b0\par
+public class Test \{\par
+   public void sonAge() \{\par
+      int age = 0;\par
+      age = age + 5;\par
+      System.out.println("Son age is : " + age);\par
+   \}\par
+   public static void main(String args[]) \{\par
+      Test test = new Test();\par
+      test.sonAge();\par
+   \}\par
+\}\par
+This will produce the following result \u8722?\par
+Program Output\par
+Son age is: 5\par
+\par
+\b Instance Variables:- \b0 Instance variables are defined inside the class outside the methods The values of the variables are unique to the particular instance.\par
+\b Example 13:\b0\par
+import java.io.*;\par
+public class Employee \{\par
+   public String name;\par
+   private double salary;\par
+\par
+   // The name variable is assigned in the constructor.\par
+   public Employee (String empName) \{\par
+      name = empName;\par
+   \}\par
+\par
+   // The salary variable is assigned a value.\par
+   public void setSalary(double empSal) \{\par
+      salary = empSal;\par
+   \}\par
+\par
+   // This method prints the employee details.\par
+   public void printEmp() \{\par
+      System.out.println("name  : " + name );\par
+      System.out.println("salary :" + salary);\par
+   \}\par
+\par
+   public static void main(String args[]) \{\par
+      Employee empOne = new Employee("Abd");\par
+      empOne.setSalary(1000);\par
+      empOne.printEmp();\par
+   \}\par
+\}\par
+This will produce the following result \u8722?\par
+Output\par
+name  : Abd\par
+salary :1000.0\par
+Class/Static Variables\par
+Class variables also known as static variables are declared with the static keyword in a class, but outside a method, constructor or a block.\par
+\par
+\b Example 14:\b0\par
+ Live Demo\par
+import java.io.*;\par
+public class Employee \{\par
+   private static double salary;\par
+   // DEPARTMENT is a constant\par
+   public static final String DEPARTMENT = "Development ";\par
+\par
+   public static void main(String args[]) \{\par
+      salary = 1000;\par
+      System.out.println(DEPARTMENT + "average salary:" + salary);\par
+   \}\par
+\}\par
+\par
+Program Output\par
+Development average salary:1000\par
+Note \u8722? If the variables are accessed from an outside class, the constant should be accessed as Employee.DEPARTMENT\par
+\par
+\par
+\b Example 15:\b0\par
+double infinity = 1.0 / 0.0;\par
+System.out.println(infinity + 1);\par
+System.out.println(infinity / 1e300);\par
+System.out.println(infinity / infinity);\par
+System.out.println(infinity - infinity);\par
+Infinity\par
+Infinity\par
+NaN\par
+NaN\par
+\par
+\b Example 15.1:\b0\par
+System.out.println(22.0 / 0.0);\par
+System.out.println(-13.0 / 0.0);\par
+System.out.println(0.0 / 0.0);\par
+Infinity\par
+-Infinity\par
+NaN\par
+\par
+\par
+\b References\b0\par
+1) {\field{\*\fldinst{HYPERLINK "https://blogs.oracle.com/corejavatechtips/the-need-for-bigdecimal"}}{\fldrslt{\ul\cf1 https://blogs.oracle.com/corejavatechtips/the-need-for-bigdecimal}}}\f0\fs22\par
+2) {\field{\*\fldinst{HYPERLINK "https://stackoverflow.com/questions/6320209/javawhy-should-we-use-bigdecimal-instead-of-double-in-the-real-world"}}{\fldrslt{\ul\cf1 https://stackoverflow.com/questions/6320209/javawhy-should-we-use-bigdecimal-instead-of-double-in-the-real-world}}}\f0\fs22\par
+\par
+\par
+\par
+}
+ 
