@@ -5,6 +5,8 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import com.google.gmodule.googlesearch.GoogleSearchBaseTest;
+
 public class TestListener extends GoogleSearchBaseTest implements ITestListener {
 
 	protected WebDriver driver;
