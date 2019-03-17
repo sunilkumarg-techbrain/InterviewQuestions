@@ -1,13 +1,12 @@
-package com.interview.sql;
+package src.test.java.com.interview.sql;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import com.google.gmodule.googlesearch.GoogleSearchBaseTest;
 
-public class TestListener extends GoogleSearchBaseTest implements ITestListener {
+public class TestListener implements ITestListener {
 
 	protected WebDriver driver;
 	
@@ -17,7 +16,6 @@ public class TestListener extends GoogleSearchBaseTest implements ITestListener 
 	public void onTestFailure(ITestResult result) {
 		driver = (WebDriver) result.getTestContext().getAttribute("WebDriver");
 	       System.out.println("Capturing screenshot of failure.");
-		captureScreenshot(driver, result.getMethod().getMethodName());
 	       System.out.println("Captured screenshot of failure and embedded in allure report.");
 
 	}
